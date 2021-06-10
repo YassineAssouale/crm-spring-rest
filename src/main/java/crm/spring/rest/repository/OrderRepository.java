@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import crm.spring.rest.exception.DaoException;
 import crm.spring.rest.model.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Integer>{
@@ -17,7 +16,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer>{
 	 * @param type the type
 	 * @param status the status
 	 * @return a list of orders
-	 * @throws DaoException
 	 */
 	List<Order> findByStatusAndType(String status, String type);
 	
