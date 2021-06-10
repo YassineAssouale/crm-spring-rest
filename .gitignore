@@ -1,3 +1,10 @@
+# Maven Java Project Files
+.gitignore
+.settings
+.classpath
+target/
+.project
+
 # Compiled class file
 *.class
 
