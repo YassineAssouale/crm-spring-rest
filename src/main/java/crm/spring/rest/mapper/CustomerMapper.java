@@ -23,8 +23,8 @@ public interface CustomerMapper {
 	default List<OrderDto> getOrders(Customer customer) {
 		List<OrderDto> orders = new ArrayList<>();
 		if (null != customer.getOrders()) {
-			orders = customer.getOrders().stream().map(order -> new OrderDto(((OrderDto) order).getId(), ((OrderDto) order).getLabel(), ((OrderDto) order).getAdrEt(),
-					((OrderDto) order).getNumberOfDays(), ((OrderDto) order).getTva(), ((OrderDto) order).getStatus(), ((OrderDto) order).getType(), ((OrderDto) order).getNotes(), customer.getId()))
+			orders = customer.getOrders().stream().map(order -> new OrderDto(order.getId(), order.getLabel(), order.getAdrEt(),
+					order.getNumberOfDays(), order.getTva(), order.getStatus(), order.getType(), order.getNotes(), customer.getId()))
 	                .collect(Collectors.toList());
 		}
         return orders;

@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.criteria.Order;
 
 @Entity
 @Table(name="customers")
@@ -52,6 +51,10 @@ public class Customer implements Serializable{
 	
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Order> orders;
+	
+	public Customer() {
+		super();
+	}
 	
 	public Customer(Integer id, String lastname, String firstname, String company, String mail, String phone, String mobile,
 			String notes, Boolean active) {

@@ -17,7 +17,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	 * @param lastname
 	 * @return the customer
 	 */
-	Customer fingByLastname(String lastname);
+	Customer findByLastname(String lastname);
 	/**
 	 * Get customer by status
 	 * @param active

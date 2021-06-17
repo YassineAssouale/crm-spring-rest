@@ -42,6 +42,10 @@ public class CustomerDto {
 		this.orders = orders;
 	}
 
+	public CustomerDto() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}

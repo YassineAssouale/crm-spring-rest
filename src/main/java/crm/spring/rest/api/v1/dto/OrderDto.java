@@ -26,7 +26,7 @@ public class OrderDto {
 	public OrderDto() {
 	}
 
-	// TODO - Builder
+	
 	public OrderDto(Integer id, String label, Double adrEt, Double numberOfDays, Double tva, String status,
 			String type, String notes, Integer customerId) {
 		super();

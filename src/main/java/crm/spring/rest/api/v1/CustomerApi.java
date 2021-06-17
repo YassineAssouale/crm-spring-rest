@@ -39,8 +39,6 @@ import crm.spring.rest.service.CustomerService;
  * allowedHeaders = {"*"} : means all headers requested by the client are allowed
  */
 @CrossOrigin(value = {"*"}, allowedHeaders = {"*"}) 
-
-
 public class CustomerApi {
 	
 	Logger log = LoggerFactory.getLogger(CustomerApi.class);
