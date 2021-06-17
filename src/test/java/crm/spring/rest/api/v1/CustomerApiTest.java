@@ -39,7 +39,7 @@ import crm.spring.rest.mapper.CustomerMapper;
 import crm.spring.rest.model.Customer;
 import crm.spring.rest.service.CustomerService;
 
-@ExtendWith(SpringExtension.class) // Mock, to use mock for test
+@ExtendWith(SpringExtension.class) // Test based Junit Jupiter
 @WebAppConfiguration // Enabling Unit Test
 @ContextConfiguration(classes= {WebConfig.class,AppConfig.class}, loader = AnnotationConfigWebContextLoader.class)
 @ActiveProfiles(profiles="test")

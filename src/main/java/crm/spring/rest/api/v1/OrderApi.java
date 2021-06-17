@@ -13,10 +13,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -64,7 +69,7 @@ public class OrderApi {
 		}
 	}
 	
-	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
 	@Transactional
 	public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto){
 		log.debug("Attempting to create order with label {}", orderDto.getLabel());
@@ -72,4 +77,44 @@ public class OrderApi {
 		return ResponseEntity.created(URI.create("/v1/orders/" + newOrder.getId())).body(newOrder);
 	}
 	
+	
+	@DeleteMapping(path = "{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Void> deleteOrder(@PathVariable final Integer id){
+		try {
+			log.debug("Attempting to delete order {}", id);
+			orderService.deleteOrder(id);
+			return ResponseEntity.noContent().build();
+		} catch (UnknownResourceException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Order Not Found!");
+		}
+		
+	}
+	
+	@PutMapping(path = "{id}",produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity <Void> updateOrder(@PathVariable final Integer id, @RequestBody OrderDto orderDto){
+		try {
+			log.debug("Updating order {}",id);
+			orderDto.setId(id);
+			orderService.updateOrder(orderMapper.mapOrderDtoToOrder(orderDto));
+			log.debug("Successfullu updated order {}",id);
+			return ResponseEntity.noContent().build();
+		} catch (UnknownResourceException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Order Not Found!");
+		}
+	}
+	
+	@PatchMapping(path ="{id}", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<Void> updateOrderLabel(@PathVariable final Integer id, @RequestParam String label){
+		try {
+			log.debug("Updating order {}", id);
+			orderService.patchOrderLabel(id, label);
+			log.debug("Successfully updated order {}",id);
+			return ResponseEntity.noContent().build();
+			
+		} catch (UnknownResourceException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Order Not Found!");
+		}
+	}
 }
