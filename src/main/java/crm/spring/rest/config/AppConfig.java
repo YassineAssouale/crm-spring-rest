@@ -38,8 +38,7 @@ public class AppConfig {
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(hibernatePropertiesForTest());
 		
-		return em;
-		
+		return em;	
 	}
 	
 	@Bean // JPA for APP

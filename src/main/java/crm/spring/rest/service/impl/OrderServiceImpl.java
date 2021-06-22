@@ -74,8 +74,7 @@ public class OrderServiceImpl implements OrderService{
 	public void patchOrderLabel(Integer id, String label) throws DaoException {
 		log.debug("Attempting to update order {}", id);
 		Order existingOrder = orderRepository.findById(id).orElseThrow(UnknownResourceException::new);
+		existingOrder.setLabel(label);
 		orderRepository.save(existingOrder);
-		
 	}
-
 }

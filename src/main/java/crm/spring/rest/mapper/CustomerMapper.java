@@ -14,6 +14,11 @@ import crm.spring.rest.api.v1.dto.OrderDto;
 import crm.spring.rest.model.Customer;
 
 @Component
+/**
+ * Mapstruct simplifies the implementation of mappings between Java bean types
+ * Mapping DTO classes and Model classes
+ *
+ */
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CustomerMapper {
 	
