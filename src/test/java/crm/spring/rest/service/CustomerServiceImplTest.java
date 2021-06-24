@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
-import org.mockito.verification.VerificationMode;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -97,6 +96,16 @@ public class CustomerServiceImplTest {
 		assertEquals("Another noun", customisedCustomer.getLastname());
 		Mockito.verify(customerRepositoryMock, VerificationModeFactory.times(2)).findById(1);
 		Mockito.verify(customerRepositoryMock).save(customer);
+	}
+	
+	@Test
+	void testDelete(){
+		Mockito.when(customerRepositoryMock.findById(1)).thenReturn(Optional.of(customer));
+		Mockito.doNothing().when(customerRepositoryMock).delete(customer);
+		customerService.deleteCustomer(1);
+		
+		Mockito.verify(customerRepositoryMock).findById(1);
+		Mockito.verify(customerRepositoryMock).delete(customer);
 	}
 	
 }
